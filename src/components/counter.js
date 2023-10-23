@@ -3,16 +3,15 @@ import io from 'socket.io-client';
 
 const socket = io('http://localhost:5000');
 
-const Home = () => {
+const Counter = () => {
 	const [count, setCount] = useState(0);
 	const [isUpdated, setIsUpdated] = useState(false);
 
 	useEffect(() => {
 		if (!isUpdated) {
-			socket.emit('updateCount');
 			updateCount();
 		}
-	}, []);
+	}, [isUpdated]);
 
 	const updateCount = () => {
 		socket.on('updateCount', newCount => {
@@ -37,4 +36,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default Counter;
